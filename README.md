@@ -35,10 +35,15 @@ Python es un lenguaje de programación interpretado cuya filosofía hace hincapi
 ## MySQL:
 
 MySQL es un sistema de gestión de bases de datos relacional desarrollado bajo licencia dual: Licencia pública general/Licencia comercial por Oracle Corporation y está considerada como la base de datos.
+
 #Motivo de uso:
+
 ##JavaScrip:
+
 Para el desarrollo de la aplicación se decidio utilizar JavaScrip puro ya que en el momento en que comencé a realizar la aplicación, inicialmente fue en Angular pero la máquina comenzo a presentar problemas con el framerork y obter por usar una que no necesitara instalar ningun packete o libreria extra que pueda exigirme más tiempo en configurar, solo necesitaba de un navegador como Chrome o Mozilla.
 ##Python:
+
 Seleccioné esta técnología para el back-end porque nunca habia realizado una API-REST usando este lenaguaje, siempre lo había útilizado con otros fines y quería no solo conocer como funciona, si no también exigirme y retarme como respondo ante un reto nuevo en un tiempo limitado.
 ##MySQL (local):
+
 Utilicé este motor de base de datos por comobidad, ya que no necesitaba de mayor esfuerzo para configurarlo ya que previamente lo tenía configurado. No hay ningún otro motivo para utilizar esta herramienta.
