@@ -33,7 +33,7 @@
         </div>
         <div class="menu container my-5 text-center">
             <div class="mt-5">
-                <table class="table">
+                <table class="table" id="tableProductT">
                     <thead>
                         <tr>
                             <th scope="col">Producto</th>
@@ -71,18 +71,58 @@
                     for (let product of datos) {
                         conten.innerHTML += `
                 <tr>
-                    <td contenteditable='true'>${product.producto}</td>
-                    <td contenteditable='true'>${product.sabor}</td>
-                    <td contenteditable='true'>${product.linea}</td>
+                    <form id="deleteForm" class="row align-items-center">
+                    <td contenteditable='true' href="#" id="prod">${product.producto}</td>
+                    <td contenteditable='true' href="#" id="fla">${product.sabor}</td>
+                    <td contenteditable='true' href="#" id="li">${product.linea}</td>
                     <td>
                         <div>
                             <button class="btn btn-primary " type="submit">Modificar</button>
-                            <button class="btn btn btn-danger" type="submit">Eliminar producto</button>
+                            <button class="btn btn btn-danger" id="buttonDelete" type="submit" onclick="deleteProduct()">Eliminar producto</button>
                         </div>
                     </td>
+                    </form>
                 </tr>
                 `;
                     }
+                }
+            </script>
+            <script>
+                function deleteProduct() {
+                    console.log('ini')
+                    var formDelete = document.getElementById('deleteForm');
+
+                    formDelete.addEventListener('submit', function(e) {
+                        e.preventDefault();
+
+                        var data = new FormData(formDelete);
+                        var url = 'http://localhost:5000/products/';
+                        var productDeleteData = data.get('prod');
+                        var flavorDeleteData = data.get('fla');
+                        var linetDeleteData = data.get('li');
+                        fetch(url + productDeleteData + '/' + flavorDeleteData + '/' + lineDeleteData, {
+                                method: 'DELETE',
+                                mode: 'cors',
+                                headers: {
+                                    Accept: 'application/json',
+                                    'Content-Type': 'application/json',
+                                    'Access-Control-Allow-Origin': '*',
+                                },
+                            })
+                            .then(res => {
+                                console.log('res', res);
+                                res.json()
+                            })
+                            .then(data => {
+                                console.log('data', data);
+                                data.json()
+                            })
+                            .catch(() =>
+                                console.log(
+                                    'Can’t access ' + url + productDeleteData + '/' + flavorDeleteData + '/' + lineDeleteData + ' response. Blocked by browser?'
+                                )
+                            );
+                    });
                 }
             </script>
         </div>

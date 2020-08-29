@@ -61,7 +61,7 @@ def deleteData(sQuerry):
     else:
         data = "Record Deleted successfully "
     return data
-
+# Función para obtener los productos
 @app.route("/products", methods = ['GET'])
 def getProducts():
     dirProducts = {}
@@ -100,7 +100,6 @@ def postProduct():
     else:
         dirProducts = {"Error": "El producto ingresado no ha sido agregado"}
         listProducts.append(dirProducts)
-        print('postProduct: ', listProducts)
     return jsonify(listProducts)
 
 # Define la ruta para los productos a editar
@@ -134,7 +133,6 @@ def deleteProduct(product):
     else:
         dirProducts = {"Error": "El producto ingresado no ha sido encontrado"}
         listProducts.append(dirProducts)
-        print('deleteProduct: ', listProducts)
     return jsonify(listProducts)
 
 
@@ -145,7 +143,6 @@ def getFlavors():
     dirFlavers = {}
     listFlavors = []
     data = getData("SELECT * FROM flavor")
-    # Conversión a Json
     for flavor in data:
         dirFlavors = {"id":flavor[0],"sabor":flavor[1]}
         listFlavors.append(dirFlavors)
@@ -153,7 +150,7 @@ def getFlavors():
 
 # Ruta para consultar un producto
 @app.route('/flavors/<string:flavor>', methods = ['GET'])
-#función para obtener un producto
+#función para obtener un sabor
 def getFlavor(flavor):
     dirProducts = {}
     listProducts = []
@@ -168,7 +165,7 @@ def getFlavor(flavor):
         listProducts.append(dirProducts)
     return jsonify(listProducts)
 
-# Define la ruta para los productos a guardar
+# Define la función para guardar un nuevo sabor
 @app.route("/flavors", methods = ['POST'])
 def postFlavors():
     dirProducts = {}
@@ -184,7 +181,7 @@ def postFlavors():
     return jsonify(listProducts)
 
 
-# Define la ruta para los productos a editar
+# Define la ruta para los sabores a editar
 @app.route("/flavors/<string:flavor>", methods = ['PUT'])
 def updateFlavor(flavor):
     data = getData(f"SELECT * FROM flavor WHERE flavor_name = '{flavor}'")
@@ -202,7 +199,7 @@ def updateFlavor(flavor):
         listProducts.append(dirProducts)
     return jsonify(listProducts)
 
-# Define la ruta para los productos a guardar
+# Define la ruta para los sabores a guardar
 @app.route("/flavors/<string:flavor>", methods = ['DELETE'])
 def deleteFlavors(flavor):
     data = getData(f"SELECT * FROM flavor WHERE flavor_name = '{flavor}' ")
@@ -217,7 +214,7 @@ def deleteFlavors(flavor):
         listProducts.append(dirProducts)
     return jsonify(listProducts)
 
-
+# Consultar lineas de producto
 @app.route("/productsline", methods = ['GET'])
 def getProductsLine():
     dirLines = {}
@@ -225,20 +222,18 @@ def getProductsLine():
     listLine = []
 
     data = getData("SELECT * FROM product_line")
-    # Conversión a Json
     for line in data:
         dirLines = {"id":line[0],"producto":line[1]}
         listLine.append(dirLines)
     return jsonify(listLine)
 
-
+# Consutlar una linea de producto
 @app.route('/productsline/<string:lineproduct>', methods = ['GET'])
 def getProductLine(lineproduct):
     dirProducts = {}
     listProducts = []
     data = getData(f"SELECT * FROM product_line WHERE product_line_name = '{lineproduct}'")
     if (len(data) > 0):
-    # Conversión a Json
         for product in data:
             dirProducts = {"id": product[0], "Linea de produccion": product[1]}
             listProducts.append(dirProducts)
@@ -247,7 +242,7 @@ def getProductLine(lineproduct):
         listProducts.append(dirProducts)
     return jsonify(listProducts)
 
-
+#Ingresar una linea de producto
 @app.route("/productsline", methods = ['POST'])
 def postProductsLine():
     dirProducts = {}
@@ -262,6 +257,7 @@ def postProductsLine():
         listProducts.append(dirProducts)
     return jsonify(listProducts)
 
+# Editar una linea de producto
 @app.route("/productsline/<string:lineproduct>", methods = ['PUT'])
 def updateProductsLine(lineproduct):
     data = getData(f"SELECT * FROM product_line WHERE product_line_name = '{lineproduct}'")
@@ -279,6 +275,7 @@ def updateProductsLine(lineproduct):
         listProducts.append(dirProducts)
     return jsonify(listProducts)
 
+# Eliminar una linea de producto
 @app.route("/productsline/<string:lineproduct>", methods = ['DELETE'])
 def deleteProductsLine(lineproduct):
     data = getData(f"SELECT * FROM product_line WHERE product_line_name = '{lineproduct}' ")
@@ -294,6 +291,7 @@ def deleteProductsLine(lineproduct):
         listProducts.append(dirProducts)
     return jsonify(listProducts)
 
+# Ingresar un producto con un sabor
 @app.route("/products/x/flavor", methods = ['POST'])
 def postProductXFlavor():
     dirProducts = {}
@@ -311,6 +309,7 @@ def postProductXFlavor():
         listProducts.append(dirProducts)
     return jsonify(listProducts)
 
+# ingresar un linea de producto por producto
 @app.route("/products/x/line", methods = ['POST'])
 def postProductXLine():
     dirProducts = {}
@@ -327,6 +326,8 @@ def postProductXLine():
         dirProducts = {"Error": "El producto ingresado no ha sido agregado"}
         listProducts.append(dirProducts)
     return jsonify(listProducts)
+
+# Ingresar un producto completo
 @app.route("/products/complete", methods = ['POST'])
 def postProductComplete():
     dirProducts = {}
@@ -347,6 +348,7 @@ def postProductComplete():
         listProducts.append(dirProducts)
     return jsonify(listProducts)
 
+# consultar un producto completo
 @app.route('/products/complete')
 def joinData():
     data = getData(f"SELECT p.product_name, "+
@@ -370,6 +372,7 @@ def joinData():
         listProducts.append(dirProducts)
     return jsonify(listProducts)
 
+# eliminar un producto completo
 @app.route("/products/complete/<string:product>/<string:flavor>/<string:productline>", methods = ['DELETE'])
 def deleteProductComplete(product,flavor,productline):
 
